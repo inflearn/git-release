@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# dev 브랜치로 전환
+echo "'dev' 브랜치로 전환합니다"
+echo "git checkout dev"
+git checkout dev
+
+echo ""
+
+# Origin 서버의 태그 받기
+echo "최신 태그 목록을 받아옵니다."
+echo "git fetch -t"
+git fetch -t
+
+echo ""
+
+# 버전 입력 받기
+echo "버전을 입력하세요 (최신 버전: $(git tag -l --sort=-refname "v*" | head -n 1))"
+echo "(v는 빼고 숫자만 입력하세요)"
+read semver
+
+echo ""
+
+# 릴리즈 브랜치로 전환
+echo "릴리즈 브랜치 release/v$semver 로 전환합니다"
+echo "git checkout -b release/v$semver"
+git checkout -b release/v$semver
+
+echo ""
+
+# 버전 태깅
+echo "버전(v$semver)을 태깅합니다"
+echo "git tag v$semver"
+git tag v$semver
+
+echo ""
+
+# 태그와 함께 푸시
+echo "GitHub에 푸시합니다. 3..2..1.."
+echo "git push origin 'release/v$semver' && git push origin v$semver"
+git push origin "release/v$semver" && git push origin v$semver
+
+echo ""
+
+echo "푸시 완료! 이제 PR을 생성할 시간입니다 :)"
