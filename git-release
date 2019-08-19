@@ -116,6 +116,13 @@ yarn version $bumper || exit_on_failed
 
 echo ""
 
+# dev 브랜치 푸시
+echo "'$dev_branch' 브랜치에 새로운 커밋이 추가되었기 때문에 Origin에 푸시합니다"
+echo "git push origin $dev_branch"
+git push origin $dev_branch
+
+echo ""
+
 semver=$(cat package.json \
   | grep version \
   | head -1 \
