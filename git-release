@@ -152,11 +152,20 @@ git push origin "$release_branch" && git push origin $v_semver || exit_on_failed
 
 echo ""
 
+PACKAGE_NAME=$(cat package.json \
+  | grep name \
+  | head -1 \
+  | awk -F: '{ print $2 }' \
+  | sed 's/[",]//g' \
+  | tr -d '[[:space:]]')
+
+echo $PACKAGE_NAME
+
 echo "💫 푸시 완료! 이제 PR을 생성할 시간입니다"
 echo ""
 echo "PR 생성 URL:"
 echo "==========================================================="
-echo "https://github.com/inflearn/ant-man/pull/new/$release_branch"
+echo "https://github.com/inflearn/$PACKAGE_NAME/pull/new/$release_branch"
 echo "==========================================================="
 
 echo ""
