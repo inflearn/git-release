@@ -22,7 +22,7 @@ v**1**.2.3 → v**2**.0.0
 
 v1.**2**.3 → v1.**3**.0
 
-### [-p | patch]
+### [-p | --patch]
 
 유의적 버전 (Semantic Versioning)에 따라 Patch 버전을 1 올립니다.
 
