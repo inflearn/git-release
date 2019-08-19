@@ -110,7 +110,7 @@ git pull --rebase || exit_on_failed "문제를 해결하고 다시 시도하세�
 echo ""
 
 # package.json 버전 정보 업데이트
-echo "✌ package.json 버전 정보를 업데이트하고 버전을 태깅합니다"
+echo "🤞 package.json 버전 정보를 업데이트하고 버전을 태깅합니다"
 echo "yarn version $bumper"
 yarn version $bumper || exit_on_failed "오류가 발생했습니다."
 
@@ -153,7 +153,7 @@ echo "==========================================================="
 echo "https://github.com/inflearn/ant-man/pull/new/$release_branch"
 echo "==========================================================="
 
-echo "☄️ Git release 마무리 작업 중입니다"
+echo "️🌈 Git release 마무리 작업 중입니다"
 
 echo ""
 
