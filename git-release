@@ -90,7 +90,7 @@ done
 
 shift $(( OPTIND - 1 ))
 
-echo "Git release를 시작합니다."
+echo "🚡 Git release를 시작합니다."
 
 echo ""
 
@@ -103,21 +103,21 @@ git checkout $dev_branch || exit_on_failed "오류가 발생했습니다. $dev_b
 echo ""
 
 # Origin dev 브랜치 최신 커밋 pull & rebase
-echo "Origin dev 브랜치의 최신 커밋을 pull & rebase합니다"
+echo "👆 Origin dev 브랜치의 최신 커밋을 pull & rebase합니다"
 echo "git pull --rebase"
 git pull --rebase || exit_on_failed "문제를 해결하고 다시 시도하세요."
 
 echo ""
 
 # package.json 버전 정보 업데이트
-echo "package.json 버전 정보를 업데이트하고 버전을 태깅합니다"
+echo "✌ package.json 버전 정보를 업데이트하고 버전을 태깅합니다"
 echo "yarn version $bumper"
 yarn version $bumper || exit_on_failed "오류가 발생했습니다."
 
 echo ""
 
 # dev 브랜치 푸시
-echo "'$dev_branch' 브랜치에 새로운 커밋이 추가되었기 때문에 Origin에 푸시합니다"
+echo "🤟 '$dev_branch' 브랜치에 새로운 커밋이 추가되었기 때문에 Origin에 푸시합니다"
 echo "git push origin $dev_branch"
 git push origin $dev_branch || exit_on_failed "오류가 발생했습니다."
 
@@ -134,26 +134,26 @@ v_semver="v$semver"
 
 # 릴리즈 브랜치로 전환
 release_branch="release/$v_semver"
-echo "릴리즈 브랜치 $release_branch 로 전환합니다"
+echo "🤘 릴리즈 브랜치 $release_branch 로 전환합니다"
 echo "git checkout -b $release_branch"
 git checkout -b $release_branch || exit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
 # 태그와 함께 푸시
-echo "GitHub에 푸시합니다. 3..2..1.."
+echo "🚀 GitHub에 푸시합니다. 3..2..1.."
 echo "git push origin '$release_branch' && git push origin $v_semver"
 git push origin "$release_branch" && git push origin $v_semver || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
-echo "푸시 완료! 이제 PR을 생성할 시간입니다"
+echo "💫 푸시 완료! 이제 PR을 생성할 시간입니다"
 echo "PR 생성 URL:"
 echo "==========================================================="
 echo "https://github.com/inflearn/ant-man/pull/new/$release_branch"
 echo "==========================================================="
 
-echo "Git release 마무리 작업 중입니다"
+echo "☄️ Git release 마무리 작업 중입니다"
 
 echo ""
 
