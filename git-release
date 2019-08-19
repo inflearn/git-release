@@ -1,51 +1,140 @@
 #!/bin/bash
 
+PACKAGE_VERSION="1.0.4"
+
+usage() {
+    err_msg "사용법: git-release [-v | --version] [-h | --help] [-M | --major] [-m | --minor] [-p | patch]"
+    exit 1
+}
+
+exit_on_failed() { 
+    echo "$@";
+    exit 1; 
+}
+
+get_version() {
+    echo "v$PACKAGE_VERSION"
+    exit 1
+}
+
+bump_major() {
+    
+    exit 1
+}
+
+err_msg() { echo "$@" ;} >&2
+
+# long 옵션 처리
+A=""
+bumper=""
+while true; do
+    [ $# -eq 0 ] && break
+    case $1 in
+        --major)
+            bumper="--major"
+            shift; continue
+            ;;
+        --minor)
+            bumper="--minor"
+            shift; continue
+            ;;
+        --patch)
+            bumper="--patch"
+            shift; continue
+            ;;
+        --help)
+            usage
+            shift; continue
+            ;;
+        --version)
+            get_version
+            shift; continue
+            ;;
+        --*) 
+            err_msg "알 수 없는 옵션: $1"
+            usage;
+            ;;
+    esac
+
+    A=$A$([ -n "$A" ] && echo -e "\a")$1
+    shift
+done
+
+# $@' 값에 short 옵션만 남기기
+IFS=$(echo -e "\a"); set -f; set -- $A; set +f; IFS=$(echo -e " \n\t")
+
+# short 옵션 처리
+while getopts "Mmjhv" opt; do
+    case $opt in
+        M)
+            bumper="--major"
+            ;;
+        m)
+            bumper="--minor"
+            ;;
+        p)
+            bumper="--patch"
+            ;;
+        h)
+            usage
+            ;;
+        v)
+            get_version
+            ;;
+        *)
+            err_msg "알 수 없는 옵션: $1"
+            usage
+            ;;
+    esac
+done
+
+shift $(( OPTIND - 1 ))
+
+echo "Git release를 시작합니다."
+
+echo ""
+
 # dev 브랜치로 전환
-echo "'dev' 브랜치로 전환합니다"
-echo "git checkout dev"
-git checkout dev
+dev_branch="dev"
+echo "🙌 '$dev_branch' 브랜치로 전환합니다"
+echo "git checkout $dev_branch"
+git checkout $dev_branch || exit_on_failed "오류가 발생했습니다. $dev_branch 브랜치가 있는지 확인하고 다시 시도하세요."
 
 echo ""
 
-# Origin 서버의 태그 받기
-echo "최신 태그 목록을 받아옵니다."
-echo "git fetch -t"
-git fetch -t
-
-echo ""
-
-# 버전 입력 받기
-echo "버전을 입력하세요 (최신 버전: $(git tag -l --sort=-refname "v*" | head -n 1))"
-echo "(v는 빼고 숫자만 입력하세요)"
-read semver
+# Origin dev 브랜치 최신 커밋 pull & rebase
+echo "Origin dev 브랜치의 최신 커밋을 pull & rebase합니다"
+echo "git pull --rebase"
+git pull --rebase || exit_on_failed "문제를 해결하고 다시 시도하세요."
 
 echo ""
 
 # package.json 버전 정보 업데이트
-echo "package.json 버전 정보를 업데이트합니다"
-echo "yarn version --new-version $semver"
-yarn version --new-version $semver
+echo "package.json 버전 정보를 업데이트하고 버전을 태깅합니다"
+echo "yarn version $bumper"
+yarn version $bumper || exit_on_failed
 
 echo ""
+
+semver=$(cat package.json \
+  | grep version \
+  | head -1 \
+  | awk -F: '{ print $2 }' \
+  | sed 's/[",]//g' \
+  | tr -d '[[:space:]]')
 
 # 릴리즈 브랜치로 전환
 echo "릴리즈 브랜치 release/v$semver 로 전환합니다"
 echo "git checkout -b release/v$semver"
-git checkout -b release/v$semver
-
-
-# # 버전 태깅
-# echo "버전(v$semver)을 태깅합니다"
-# echo "git tag v$semver"
-# git tag v$semver
+git checkout -b release/v$semver || exit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
 # 태그와 함께 푸시
 echo "GitHub에 푸시합니다. 3..2..1.."
 echo "git push origin 'release/v$semver' && git push origin v$semver"
-git push origin "release/v$semver" && git push origin v$semver
+git push origin "release/v$semver" && git push origin v$semver || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
-echo "푸시 완료! 이제 PR을 생성할 시간입니다 :)"
+echo "푸시 완료! 이제 PR을 생성할 시간입니다 🖖"
