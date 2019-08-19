@@ -147,6 +147,26 @@ git push origin "$release_branch" && git push origin $v_semver || exit_on_failed
 
 echo ""
 
-echo "푸시 완료! 이제 PR을 생성할 시간입니다 🖖"
+echo "푸시 완료! 이제 PR을 생성할 시간입니다"
 echo "PR 생성 URL:"
+echo "==========================================================="
 echo "https://github.com/inflearn/ant-man/pull/new/$release_branch"
+echo "==========================================================="
+
+echo "Git release 마무리 작업 중입니다"
+
+echo ""
+
+echo "$dev_branch 브랜치로 전환합니다"
+echo "git checkout $dev_branch"
+git checkout $dev_branch
+
+echo ""
+
+echo "$release_branch 브랜치를 삭제합니다"
+echo "git branch -d $release_branch"
+git branch -d $release_branch
+
+echo ""
+
+echo "진짜 안녕! 🖖"
