@@ -133,7 +133,7 @@ semver=$(cat package.json \
 # 릴리즈 브랜치로 전환
 echo "릴리즈 브랜치 release/v$semver 로 전환합니다"
 echo "git checkout -b release/v$semver"
-git checkout -b release/v$semver || exit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
+git checkout -b releasse/v$semver || exit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
