@@ -1,15 +1,12 @@
 {
   "name": "git-release",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helper script for git release workflow.",
   "main": "git-release",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/inflearn/git-release.git"
-  },
+  "repository": "git+https://github.com/inflearn/git-release.git",
   "keywords": [
     "git",
     "script"
