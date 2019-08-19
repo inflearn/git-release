@@ -1,0 +1,23 @@
+{
+  "name": "git-release",
+  "version": "1.0.0",
+  "description": "Helper script for git release workflow.",
+  "main": "git-release",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inflearn/git-release.git"
+  },
+  "keywords": [
+    "git",
+    "script"
+  ],
+  "author": "Joshua Jung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inflearn/git-release/issues"
+  },
+  "homepage": "https://github.com/inflearn/git-release#readme"
+}
