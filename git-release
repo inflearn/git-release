@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE_VERSION="1.0.4"
+PACKAGE_VERSION="3.1.1"
 
 usage() {
     err_msg "사용법: git-release [-v | --version] [-h | --help] [-M | --major] [-m | --minor] [-p | patch]"
@@ -153,10 +153,13 @@ git push origin "$release_branch" && git push origin $v_semver || exit_on_failed
 echo ""
 
 echo "💫 푸시 완료! 이제 PR을 생성할 시간입니다"
+echo ""
 echo "PR 생성 URL:"
 echo "==========================================================="
 echo "https://github.com/inflearn/ant-man/pull/new/$release_branch"
 echo "==========================================================="
+
+echo ""
 
 echo "️🌈 Git release 마무리 작업 중입니다"
 
