@@ -1,6 +1,6 @@
 {
   "name": "git-release",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Helper script for git release workflow.",
   "main": "git-release",
   "scripts": {
