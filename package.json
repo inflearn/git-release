@@ -11,7 +11,7 @@
     "git",
     "script"
   ],
-  "author": "Joshua Jung",
+  "author": "Joshua Jung <wbqdinno@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/inflearn/git-release/issues"
