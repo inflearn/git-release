@@ -12,7 +12,7 @@
     "script"
   ],
   "author": "Joshua Jung",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/inflearn/git-release/issues"
   },
