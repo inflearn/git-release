@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE_VERSION="3.1.6"
+PACKAGE_VERSION="4.0.1"
 
 usage() {
     err_msg "사용법: git-release [-v | --version] [-h | --help] [-M | --major] [-m | --minor] [-p | patch]"
@@ -164,9 +164,9 @@ echo $PACKAGE_NAME
 echo "💫 푸시 완료! 이제 PR을 생성할 시간입니다"
 echo ""
 echo "PR 생성 URL:"
-echo "==========================================================="
-echo "https://github.com/inflearn/$PACKAGE_NAME/pull/new/$release_branch"
-echo "==========================================================="
+echo "===================================================================="
+echo "https://github.com/inflearn/$PACKAGE_NAME/pull/new/master...$release_branch"
+echo "===================================================================="
 
 echo ""
 
