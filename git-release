@@ -158,7 +158,7 @@ echo "git push origin '$release_branch' && git push origin $v_semver"
 
 echo ""
 
-PACKAGE_NAME=$(< package.json grep name \
+PACKAGE_NAME=$(< package.json grep repo-name \
   | head -1 \
   | awk -F: '{ print $2 }' \
   | sed 's/[",]//g' \
