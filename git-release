@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PACKAGE_VERSION="4.0.1"
 
 usage() {
     err_msg "사용법: git-release [-v | --version] [-h | --help] [-M | --major] [-m | --minor] [-p | patch]"
@@ -10,11 +9,6 @@ usage() {
 exit_on_failed() { 
     echo "$@";
     exit 1; 
-}
-
-get_version() {
-    echo "v$PACKAGE_VERSION"
-    exit 1
 }
 
 bump_major() {
@@ -51,8 +45,6 @@ while true; do
             usage
             shift; continue
             ;;
-        --version)
-            get_version
             shift; continue
             ;;
         --*) 
@@ -82,9 +74,6 @@ while getopts "Mmphv" opt; do
             ;;
         h)
             usage
-            ;;
-        v)
-            get_version
             ;;
         *)
             # err_msg "알 수 없는 옵션: -$OPTARG"
