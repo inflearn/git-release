@@ -176,9 +176,12 @@ echo "===================================================================="
 echo ""
 
 if [ $is_rc -eq 1 ];then
-  echo "⚠️ RC 브랜치 배포를 준비합니다."
+  echo "⚠️  RC 브랜치 배포를 준비합니다."
   echo "git checkout rc"
-  git checkout rc
+  git checkout rc || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
+
+  echo "git pull origin rc"
+  git pull origin rc || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
   echo "git rebase $release_branch"
   git rebase "$release_branch" || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
@@ -188,7 +191,7 @@ if [ $is_rc -eq 1 ];then
 
 fi
 
-echo "️🌈 Git release 마무리 작업 중입니다"
+echo "🌈 Git release 마무리 작업 중입니다"
 
 echo ""
 
