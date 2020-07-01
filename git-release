@@ -134,8 +134,8 @@ git push origin $dev_branch || exit_on_failed "오류가 발생했습니다."
 
 echo ""
 
-semver=$(cat package.json \
-  | grep version \
+semver=$(< package.json \
+  grep version \
   | head -1 \
   | awk -F: '{ print $2 }' \
   | sed 's/[",]//g' \
@@ -158,8 +158,7 @@ git push origin "$release_branch" && git push origin $v_semver || exit_on_failed
 
 echo ""
 
-PACKAGE_NAME=$(cat package.json \
-  | grep name \
+PACKAGE_NAME=$(< package.json grep name \
   | head -1 \
   | awk -F: '{ print $2 }' \
   | sed 's/[",]//g' \
