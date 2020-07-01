@@ -147,7 +147,7 @@ v_semver="v$semver"
 release_branch="release/$v_semver"
 echo "🤘 릴리즈 브랜치 $release_branch 로 전환합니다."
 echo "git checkout -b $release_branch"
-git checkout -b $release_branch || exit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
+git checkout -b "$release_branch" || exit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
@@ -164,7 +164,7 @@ PACKAGE_NAME=$(< package.json grep name \
   | sed 's/[",]//g' \
   | tr -d '[:space:]')
 
-echo $PACKAGE_NAME
+echo "$PACKAGE_NAME"
 
 echo "💫 푸시 완료! 이제 PR을 생성할 시간입니다."
 echo ""
@@ -194,13 +194,13 @@ echo ""
 
 echo "$dev_branch 브랜치로 전환합니다"
 echo "git checkout $dev_branch"
-git checkout $dev_branch
+git checkout "$dev_branch"
 
 echo ""
 
-echo "$release_branch 브랜치를 삭제합니다"
+echo "$release_branch 브랜치를 삭제합니다."
 echo "git branch -d $release_branch"
-git branch -d $release_branch
+git branch -d "$release_branch"
 
 echo ""
 
