@@ -158,7 +158,7 @@ echo "git push origin '$release_branch' && git push origin $v_semver"
 
 echo ""
 
-PACKAGE_NAME=$(< package.json grep repo-name \
+PACKAGE_NAME=$(< package.json grep name \
   | head -1 \
   | awk -F: '{ print $2 }' \
   | sed 's/[",]//g' \
@@ -170,7 +170,7 @@ echo "💫 푸시 완료! 이제 PR을 생성할 시간입니다."
 echo ""
 echo "PR 생성 URL:"
 echo "===================================================================="
-echo "https://github.com/inflearn/$PACKAGE_NAME/pull/new/master...$release_branch"
+echo "$(git config --get remote.origin.url | cut -d '.' -f 1,2)/pull/new/master...$release_branch"
 echo "===================================================================="
 
 echo ""
