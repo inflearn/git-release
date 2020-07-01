@@ -16,7 +16,7 @@ echo "Git release 자동화 스크립트";
 echo ""
 
 usage() {
-    err_msg "사용법: git-release [-v | --version] [-h | --help] [-M | --major] [-m | --minor] [-p | patch]"
+    err_msg "사용법: git-release [-h | --help] [-M | --major] [-m | --minor] [-p | patch] --rc"
     exit 1
 }
 
@@ -39,6 +39,7 @@ fi
 
 # long 옵션 처리
 A=""
+is_rc=0
 bumper=""
 while true; do
     [ $# -eq 0 ] && break
@@ -59,6 +60,8 @@ while true; do
             usage
             shift; continue
             ;;
+        --rc)
+            is_rc=1
             shift; continue
             ;;
         --*) 
@@ -172,6 +175,19 @@ echo "https://github.com/inflearn/$PACKAGE_NAME/pull/new/master...$release_branc
 echo "===================================================================="
 
 echo ""
+
+if [ $is_rc -eq 1 ];then
+  echo "⚠️ RC 브랜치 배포를 준비합니다."
+  echo "git checkout rc"
+  git checkout rc
+
+  echo "git rebase $release_branch"
+  git rebase "$release_branch" || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
+
+  echo "git push -f origin rc"
+  git push -f origin rc || exit_on_failed "오류가 발생했습니다."
+
+fi
 
 echo "️🌈 Git release 마무리 작업 중입니다"
 
