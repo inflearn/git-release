@@ -177,7 +177,11 @@ echo ""
 
 if [ $is_rc -eq 1 ];then
   echo "⚠️  RC 브랜치 배포를 준비합니다."
+
   echo ""
+
+  echo "git branch -d rc"
+  git branch -d rc || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
   echo ""
 
