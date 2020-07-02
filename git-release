@@ -46,14 +46,17 @@ while true; do
     case $1 in
         --major)
             bumper="--major"
+            echo "Major 버전을 1 판올림합니다."
             shift; continue
             ;;
         --minor)
             bumper="--minor"
+            echo "Minor 버전을 1 판올림합니다."
             shift; continue
             ;;
         --patch)
             bumper="--patch"
+            echo "Patch 버전을 1 판올림합니다."
             shift; continue
             ;;
         --help)
@@ -62,6 +65,7 @@ while true; do
             ;;
         --rc)
             is_rc=1
+            echo "rc 배포가 진행됩니다."
             shift; continue
             ;;
         --*) 
@@ -82,18 +86,22 @@ while getopts "Mmphr" opt; do
     case $opt in
         M)
             bumper="--major"
+            echo "Major 버전을 1 판올림합니다."
             ;;
         m)
             bumper="--minor"
+            echo "Minor 버전을 1 판올림합니다."
             ;;
         p)
             bumper="--patch"
+            echo "Patch 버전을 1 판올림합니다."
             ;;
         h)
             usage
             ;;
         r)
             is_rc=1
+            echo "rc 배포가 진행됩니다."
             ;;
         *)
             # err_msg "알 수 없는 옵션: -$OPTARG"
