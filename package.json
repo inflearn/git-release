@@ -1,6 +1,6 @@
 {
   "name": "inflearn-git-release",
-  "version": "4.1.6",
+  "version": "5.1.0",
   "description": "Helper script for git release workflow.",
   "main": "git-release",
   "scripts": {
