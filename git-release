@@ -16,7 +16,7 @@ echo "Git release 자동화 스크립트";
 echo ""
 
 usage() {
-    err_msg "사용법: git-release [-h | --help] [-M | --major] [-m | --minor] [-p | patch] --rc"
+    err_msg "사용법: git-release [-h | --help] [-M | --major] [-m | --minor] [-p | patch] [-r | --rc]"
     exit 1
 }
 
@@ -78,7 +78,7 @@ done
 IFS=$(echo -e "\a"); set -f; set -- $A; set +f; IFS=$(echo -e " \n\t")
 
 # short 옵션 처리
-while getopts "Mmphv" opt; do
+while getopts "Mmphr" opt; do
     case $opt in
         M)
             bumper="--major"
@@ -91,6 +91,9 @@ while getopts "Mmphv" opt; do
             ;;
         h)
             usage
+            ;;
+        r)
+            is_rc=1
             ;;
         *)
             # err_msg "알 수 없는 옵션: -$OPTARG"
