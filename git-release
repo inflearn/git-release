@@ -137,9 +137,14 @@ git pull --rebase || exit_on_failed "문제를 해결하고 다시 시도하세�
 echo ""
 
 # package.json 버전 정보 업데이트
-echo "🤞 package.json 버전 정보를 업데이트하고 버전을 태깅합니다."
-echo "yarn version $bumper"
-yarn version $bumper || exit_on_failed "오류가 발생했습니다."
+echo "🤞 package.json 버전 정보를 업데이트합니다."
+echo "yarn version $bumper --no-git-tag-version"
+yarn version $bumper --no-git-tag-version || exit_on_failed "오류가 발생했습니다."
+
+echo "git add package.json"
+git add package.json || exit_on_failed "오류가 발생했습니다."
+echo "git commit -m bump version"
+git commit -m "bump version" || exit_on_failed "오류가 발생했습니다."
 
 echo ""
 
