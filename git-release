@@ -174,8 +174,8 @@ echo ""
 
 # 태그와 함께 푸시
 echo "🚀 GitHub에 푸시합니다. 3..2..1.."
-echo "git push origin '$release_branch' && git push origin $v_semver"
-(git push origin "$release_branch" && git push origin "$v_semver") || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
+echo "git push origin '$release_branch'"
+(git push origin "$release_branch") || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
