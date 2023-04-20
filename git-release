@@ -137,9 +137,14 @@ git pull --rebase || exit_on_failed "문제를 해결하고 다시 시도하세�
 echo ""
 
 # package.json 버전 정보 업데이트
-echo "🤞 package.json 버전 정보를 업데이트하고 버전을 태깅합니다."
-echo "yarn version $bumper"
-yarn version $bumper || exit_on_failed "오류가 발생했습니다."
+echo "🤞 package.json 버전 정보를 업데이트합니다."
+echo "yarn version $bumper --no-git-tag-version"
+yarn version $bumper --no-git-tag-version || exit_on_failed "오류가 발생했습니다."
+
+echo "git add package.json"
+git add package.json || exit_on_failed "오류가 발생했습니다."
+echo "git commit -m bump version"
+git commit -m "bump version" || exit_on_failed "오류가 발생했습니다."
 
 echo ""
 
@@ -169,8 +174,8 @@ echo ""
 
 # 태그와 함께 푸시
 echo "🚀 GitHub에 푸시합니다. 3..2..1.."
-echo "git push origin '$release_branch' && git push origin $v_semver"
-(git push origin "$release_branch" && git push origin "$v_semver") || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
+echo "git push origin '$release_branch'"
+(git push origin "$release_branch") || exit_on_failedexit_on_failed "오류가 발생했습니다. 나머지 과정은 수동으로 진행해주세요."
 
 echo ""
 
